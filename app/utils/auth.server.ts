@@ -4,8 +4,13 @@ import {Auth0Strategy, Auth0Profile, Auth0ExtraParams} from 'remix-auth-auth0'
 import {sessionStorage} from '~/session.server'
 import {login, User} from '~/models/user'
 
-let {AUTH0_CLIENT_ID, AUTH0_CLIENT_SECRET, AUTH0_DOMAIN, AUTH0_CALLBACK_URL} =
-  process.env
+let {
+  AUTH0_CLIENT_ID,
+  AUTH0_CLIENT_SECRET,
+  AUTH0_DOMAIN,
+  AUTH0_CALLBACK_URL,
+  DOMAIN,
+} = process.env
 
 // Ensure they are defined and throw error if not
 if (!AUTH0_DOMAIN) throw new Error('Missing Auth0 domain.')
@@ -19,7 +24,7 @@ let auth0Strategy = new Auth0Strategy(
     domain: AUTH0_DOMAIN,
     clientID: AUTH0_CLIENT_ID,
     clientSecret: AUTH0_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/auth0/callback',
+    callbackURL: AUTH0_CALLBACK_URL,
     audience: 'https://thehackboard.com', // optional
   },
   async ({accessToken, refreshToken, extraParams, profile}) =>
