@@ -9,6 +9,7 @@ export default function Index() {
       <Form action="/auth/logout" method="post">
         <button>Logout</button>
       </Form>
+      <div>Hello world</div>
     </>
   )
 }
