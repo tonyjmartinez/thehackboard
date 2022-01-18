@@ -14,7 +14,11 @@ FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:0-${VARIANT}
 
 # [Optional] Uncomment if you want to install more global node modules
 # RUN su node -c "npm install -g <your-package-list-here>"
-RUN su node -c "yarn global add netlify-cli"
+RUN su node -c "npm i -g netlify-cli"
 
-RUN SNIPPET="alias gs='git status'" \
-    && echo $SNIPPET >> "/home/node/.bashrc"
+
+RUN echo $' \n\
+alias gb="git branch" \n\
+alias gco="git checkout" \n\
+alias gs="git status" \n\
+' >> "/home/node/.bashrc"
