@@ -3,8 +3,8 @@ import type {ActionFunction, LoaderFunction} from 'remix'
 import {authenticator} from '~/utils/auth.server'
 
 export let loader: LoaderFunction = async ({request}) => {
-  const {email} = await authenticator.isAuthenticated(request)
-  return {email}
+  const data = await authenticator.isAuthenticated(request)
+  return {email: data?.email}
 }
 
 export default function Index() {
